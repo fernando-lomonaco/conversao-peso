@@ -26,8 +26,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USER }}/conversao-temperatura:latest
-            ${{ secrets.DOCKERHUB_USER }}/conversao-temperatura:v${{ github.run_number }}
+            ${{ secrets.DOCKERHUB_USER }}/conversao-peso:latest
+            ${{ secrets.DOCKERHUB_USER }}/conversao-peso:v${{ github.run_number }}
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
@@ -43,6 +43,6 @@ jobs:
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v1.3
         with:
-          images: ${{ secrets.DOCKERHUB_USER }}/conversao-temperatura:v${{ github.run_number }}
+          images: ${{ secrets.DOCKERHUB_USER }}/conversao-peso:v${{ github.run_number }}
           manifests: |
             k8s/deployment.yml
